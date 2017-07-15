@@ -1,9 +1,17 @@
-from rule_based_extractor import RuleBasedAttributeExtractor
-from rule_based_estimator import RuleBasedDialogueActTypeEstimator
+# -*- coding: utf-8 -*-
 
-extractor = RuleBasedAttributeExtractor()
-estimator = RuleBasedDialogueActTypeEstimator()
-attribute = extractor.extract(text='ラーメンを食べたい')
-act_type = estimator.estimate(attribute)
-print(act_type)
->>> 'INFORM_GENRE'
+
+class RuleBasedDialogueActTypeEstimator(object):
+
+    def __init__(self):
+        pass
+
+    def estimate(self, attribute):
+        if attribute['GENRE'] != '':
+            return 'INFORM_GENRE'
+        elif attribute['LOCATION'] != '':
+            return 'INFORM_LOC'
+        elif attribute['MAXIMUM_AMOUNT'] != '':
+            return 'INFORM_MONEY'
+        else:
+            return 'OTHER'
